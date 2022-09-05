@@ -46,3 +46,14 @@ resource "aws_instance" "apache" {
     Name = "prod-apache-ec2"
   }
 }
+
+resource "aws_instance" "grafana" {
+  ami  = "ami-0b89f7b3f054b957e"
+  instance_type = "t2.micro"
+  subnet_id=aws_subnet.private[0].id
+ vpc_security_group_ids = [aws_security_group.apache.id]
+ 
+  tags = {
+    Name = "prod-grafana-ec2"
+  }
+}
